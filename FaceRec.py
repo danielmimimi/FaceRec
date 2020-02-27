@@ -43,6 +43,11 @@ def loadStoredImages(myPath):
     print('Learned encoding for', len(known_face_encodings), 'images.')
     return known_face_encodings,known_face_names
 
+def StoreEncodings(mypath,known_face_names,known_face_encodings):
+    df = pd.DataFrame.from_records([known_face_names,known_face_encodings])
+    df_1 = df.transpose()
+    df_1.to_pickle(mypath)
+
 def DrawBoundingBoxes(image, boxs,names,faktor):
     for (top, right, bottom, left),name in zip(boxs,names):
         cv2.rectangle(image,(left*faktor, top*faktor), (right*faktor, bottom*faktor),(0,255,0),3)
